@@ -1,3 +1,5 @@
+#
+
 #This program average teat scores, It asks the users for the number of the students and the number of test scores per students
 
 #Add input validation: students and test number can not be exceed 11. The number of exam score should be 0 to 100
@@ -10,13 +12,13 @@
 import streamlit as st
 
 #Get the number of the students
-num_student = int(st.number_input("How many students do you have: "))
+num_student = int(input("How many students do you have: "))
 #! input validation for num_students
 while num_student <= 0 or num_student > 11:
     st.write("The number is wrong, please enter again!")
-    num_student = int(st.number_input("How many students do you have: "))
+    num_student = int(input("How many students do you have: "))
 #Get the number of the test scores of per students
-num_test_score = int(st.number_input("How many quiz are you run per student: "))
+num_test_score = int(input("How many quiz are you run per student: "))
 #! input validation for quiz
 while num_test_score <= 0 or num_test_score > 11:
     st.write("Sorry the number is wrong, please enter again!")
@@ -32,11 +34,11 @@ for student in range (num_student):
     st.write('------------------------------')
     for test_num in range (num_test_score):
         st.write("test number", test_num + 1)
-        score = float(st.number_input("score: "))
+        score = float(input("score: "))
         #! input validation for score
         while score < 0 or score > 100:
             st.write("Sorry, the number is wrong, please enter again!")
-            score = float(st.number_input("score: "))
+            score = float(input("score: "))
         total = total + score #total += score
 #Calculate the average test score for this students
     average = total / num_test_score
