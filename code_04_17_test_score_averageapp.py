@@ -43,12 +43,12 @@ for student in range (num_student):
             score = float(st.number_input("score: ", key = score_key))
         total = total + score #total += score
 #Calculate the average test score for this students
-if num_test_score > 0:
-    average = total / num_test_score
-    total_average_score = total_average_score + total
+    if num_test_score > 0:
+        average = total / num_test_score
+        total_average_score = total_average_score + total
 #Display the average
-    st.write('The average for student number', student + 1, 'is', average)
-    st.write()
+        st.write('The average for student number', student + 1, 'is', average)
+        st.write()
 if num_student * num_test_score > 0:
     result =(total_average_score / (num_student * num_test_score))
     st.write(f"The average score of the all students' score is: {result}")
