@@ -10,19 +10,20 @@
 #! (EXTRA POINT) Deploy your application to the github and stream.io (leave your app address with "#" at the top of the program)
 
 import streamlit as st
-
 #Get the number of the students
-num_student = int(input("How many students do you have: "))
+num_student = int(st.number_input("How many students do you have: ", key='num_students'))
 #! input validation for num_students
-while num_student <= 0 or num_student > 11:
+while num_student < 0 or num_student >= 11:
     st.write("The number is wrong, please enter again!")
-    num_student = int(input("How many students do you have: "))
+    num_student = int(st.number_input("How many students do you have: ", key='num_students'))
+
 #Get the number of the test scores of per students
-num_test_score = int(input("How many quiz are you run per student: "))
+num_test_score = int(st.number_input("How many quiz are you run per student: ", key='num_test_scores'))
 #! input validation for quiz
-while num_test_score <= 0 or num_test_score > 11:
+while num_test_score < 0 or num_test_score >= 11:
     st.write("Sorry the number is wrong, please enter again!")
-    num_test_score = int(st.number_input("How many quiz are you run per student: "))
+    num_test_score = int(st.number_input("How many quiz are you run per student: ", key='num_test_scores'))
+
 #! Calculate the average exams score of the all students
 total_average_score = 0.0
 #Deterine each student's average test score
@@ -34,17 +35,20 @@ for student in range (num_student):
     st.write('------------------------------')
     for test_num in range (num_test_score):
         st.write("test number", test_num + 1)
-        score = float(input("score: "))
+        score_key = f"score_{student}_{test_num}"
+        score = float(st.number_input("score: ", key = score_key))
         #! input validation for score
         while score < 0 or score > 100:
             st.write("Sorry, the number is wrong, please enter again!")
-            score = float(input("score: "))
+            score = float(st.number_input("score: ", key = score_key))
         total = total + score #total += score
 #Calculate the average test score for this students
+if num_test_score > 0:
     average = total / num_test_score
     total_average_score = total_average_score + total
 #Display the average
     st.write('The average for student number', student + 1, 'is', average)
     st.write()
-result = total_average_score / (num_student * num_test_score)
-st.write(f"The average score of the all students' score is: {result}")
+if num_student * num_test_score > 0:
+    result =(total_average_score / (num_student * num_test_score))
+    st.write(f"The average score of the all students' score is: {result}")
